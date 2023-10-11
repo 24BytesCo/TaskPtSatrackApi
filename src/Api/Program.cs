@@ -55,4 +55,33 @@ app.UseCors("CorsPolicy");
 
 app.MapControllers();
 
+// Crea un ámbito de servicios para realizar tareas relacionadas con la base de datos.
+using (var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+
+    var loggerFactory = service.GetRequiredService<ILoggerFactory>();
+
+    try
+    {
+        // Obtiene el contexto de la base de datos, necesario para las migraciones y la carga de datos iniciales.
+        var context = service.GetRequiredService<TaskDbContext>();
+
+        // Realiza migraciones pendientes en la base de datos de forma asíncrona.
+        await context.Database.MigrateAsync();
+
+        // Llama a un método para cargar datos iniciales en la base de datos.
+        await TaskDbDataContext.LoadDataAsync(context, loggerFactory);
+    }
+    catch (Exception ex)
+    {
+        // En caso de error, registra el error en el sistema de registro.
+        var logger = loggerFactory.CreateLogger<Program>();
+
+        // Registra un mensaje de error junto con el mensaje de la excepción.
+        logger.LogError(ex.Message, "Error en la migración");
+    }
+}
+
+
 app.Run();
