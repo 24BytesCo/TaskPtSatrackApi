@@ -11,8 +11,5 @@ namespace Tareas.Application.Persistence
         // Este repositorio se utiliza para realizar operaciones de lectura y escritura en la entidad.
         IAsyncRepository<TEntity> Repository<TEntity>() where TEntity : class;
 
-        // El método Complete() se utiliza para confirmar y finalizar la transacción de la unidad de trabajo.
-        // Devuelve el número de cambios guardados en la base de datos como resultado de la transacción.
-        Task<int> Complete();
     }
 }
