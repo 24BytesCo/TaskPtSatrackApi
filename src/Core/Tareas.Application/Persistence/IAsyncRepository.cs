@@ -37,7 +37,7 @@ namespace Tareas.Application.Persistence
         );
 
         // Recupera un elemento de tipo T por su ID de forma asíncrona.
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(Guid id);
 
         // Agrega un elemento de tipo T de forma asíncrona.
         Task<T> AddAsync(T entity);
