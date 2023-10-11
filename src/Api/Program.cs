@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Tareas.Infrastructure;
 using Tareas.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Agregamos y aseguramos que los servicios de infraestructura esten configurados correctamente
+builder.Services.AddInfraestructureServiceRegistration(builder.Configuration);
 
 // Configuración y registro del contexto de base de datos (TaskDbContext) en el contenedor de servicios.
 builder.Services.AddDbContext<TaskDbContext>(options =>
