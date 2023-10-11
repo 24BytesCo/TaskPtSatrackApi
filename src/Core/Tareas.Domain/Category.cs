@@ -14,5 +14,7 @@ namespace Tareas.Domain
 
         public string? Name { get; set; }
 
+
+        public virtual ICollection<ScheduledTask>? ScheduledTasks { get; set;}
     }
 }

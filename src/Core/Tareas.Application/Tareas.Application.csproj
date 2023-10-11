@@ -1,13 +1,59 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\Tareas.Domain\Tareas.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<!-- Referencias a los paquetes NuGet utilizados en el proyecto -->
+		<PackageReference Include="AutoMapper" Version="12.0.1">
+			<!-- AutoMapper se utiliza para mapear objetos entre capas de la aplicación. -->
+		</PackageReference>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1">
+			<!-- Esta extensión de AutoMapper se usa para la inyección de dependencias en ASP.NET Core. -->
+		</PackageReference>
+		<PackageReference Include="FluentValidation" Version="11.7.1">
+			<!-- FluentValidation es una biblioteca para validar modelos en aplicaciones ASP.NET Core. -->
+		</PackageReference>
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0">
+			<!-- Extensión de FluentValidation para su uso en aplicaciones ASP.NET Core. -->
+		</PackageReference>
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1">
+			<!-- Extensión para la inyección de dependencias con FluentValidation. -->
+		</PackageReference>
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0">
+			<!-- MediatR se utiliza para implementar el patrón Mediator en ASP.NET Core y esta extensión permite la inyección de dependencias. -->
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
+			<!-- Herramientas de diseño de Entity Framework Core para migraciones y scaffolding. -->
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12">
+			<!-- Proveedor de base de datos SQL Server para Entity Framework Core. -->
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
+			<!-- Herramientas de Entity Framework Core para la gestión de base de datos y migraciones. -->
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0">
+			<!-- Extensión para la configuración de opciones en ASP.NET Core. -->
+		</PackageReference>
+		<PackageReference Include="Microsoft.OpenApi" Version="1.6.9">
+			<!-- Herramienta para generar documentación de API en formato OpenAPI (anteriormente Swagger). -->
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0">
+			<!-- Integración de Swagger en ASP.NET Core para documentar y probar APIs. -->
+		</PackageReference>
+	</ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<ItemGroup>
+		<!-- Referencia al proyecto Tareas.Domain -->
+		<ProjectReference Include="..\Tareas.Domain\Tareas.Domain.csproj" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<!-- Configuración de propiedades del proyecto -->
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
 </Project>
