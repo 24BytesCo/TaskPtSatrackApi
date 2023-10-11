@@ -24,6 +24,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configuración de políticas CORS para permitir solicitudes desde cualquier origen, método y encabezado.
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+        builder.AllowAnyOrigin()       // Permite solicitudes desde cualquier origen (dominio).
+               .AllowAnyMethod()       // Permite cualquier método de solicitud (GET, POST, etc.).
+               .AllowAnyHeader()       // Permite cualquier encabezado de solicitud.
+        );
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +47,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 //app.UseAuthorization();
+app.UseCors("CorsPolicy");
 
 app.MapControllers();
 
