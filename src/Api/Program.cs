@@ -1,4 +1,9 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.Xml;
+using System.Text.Json.Serialization;
+using Tareas.Application;
+using Tareas.Application.Features.Categories.Queries.GetCategoriesList;
 using Tareas.Infrastructure;
 using Tareas.Infrastructure.Persistence;
 
@@ -6,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Agregamos y aseguramos que los servicios de infraestructura esten configurados correctamente
 builder.Services.AddInfraestructureServiceRegistration(builder.Configuration);
+
+//Agregamos y aseguramos que los servicios de Aplication esten configurados correctamente
+builder.Services.AddApplicationServices(builder.Configuration);
 
 // Configuración y registro del contexto de base de datos (TaskDbContext) en el contenedor de servicios.
 builder.Services.AddDbContext<TaskDbContext>(options =>
@@ -20,9 +28,12 @@ builder.Services.AddDbContext<TaskDbContext>(options =>
     });
 });
 
-// Add services to the container.
+// Registra los controladores y características de MediatR para el ensamblado que contiene la clase 'GetCategoriesListQuery'.
+builder.Services.AddMediatR(typeof(GetCategoriesListQueryHandler).Assembly);
 
-builder.Services.AddControllers();
+
+// Add services to the container.
+builder.Services.AddControllers().AddJsonOptions(r=> r.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
