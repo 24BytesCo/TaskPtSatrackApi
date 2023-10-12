@@ -23,6 +23,6 @@ namespace Tareas.Application.Features.Tasks.Queries.Vms
 
         public DateTime? LastUpdateDate { get; set; }
 
-        public ICollection<CategoryVm>? Categories { get; set; }
+        public CategoryVm? Category { get; set; }
     }
 }

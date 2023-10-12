@@ -28,7 +28,7 @@ namespace Tareas.Api.Controllers
 
         [HttpPost("Create", Name = "CreateCategory")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<CategoryVm>> CreateCategory([FromForm] CreateCategoryCommand request)
+        public async Task<ActionResult<CategoryVm>> CreateCategory([FromBody] CreateCategoryCommand request)
         {
             return Ok(await _mediator.Send(request));
         }

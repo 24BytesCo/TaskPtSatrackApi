@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Tareas.Application.Behaviors;
 using Tareas.Application.Features.Categories.Commands.CreateCategory;
+using Tareas.Application.Features.Tasks.Commands.CreateTask;
+using Tareas.Application.Features.Tasks.Commands.UpdateTask;
 using Tareas.Application.Mappings;
 
 namespace Tareas.Application
@@ -43,6 +45,8 @@ namespace Tareas.Application
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
 
             services.AddTransient<IValidator<CreateCategoryCommand>, CreateCategoryCommandValidator>();
+            services.AddTransient<IValidator<CreateTaskCommand>, CreateTaskCommandValidation>();
+            services.AddTransient<IValidator<UpdateTaskCommand>, UpdateTaskCommandValidation>();
 
 
             // - 'ValidationBehavior': Realiza la validación de las solicitudes de MediatR usando FluentValidation.

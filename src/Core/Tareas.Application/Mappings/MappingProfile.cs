@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Tareas.Application.Features.Categories.Commands.CreateCategory;
 using Tareas.Application.Features.Categories.Queries.Vms;
+using Tareas.Application.Features.Tasks.Commands.CreateTask;
+using Tareas.Application.Features.Tasks.Commands.UpdateTask;
 using Tareas.Application.Features.Tasks.Queries.Vms;
 using Tareas.Domain;
 
@@ -28,10 +30,12 @@ namespace Tareas.Application.Mappings
                 .ForMember(r => r.Deadline, x => x.MapFrom(t => t.Deadline))
                 .ForMember(r => r.CreatedDate, x => x.MapFrom(t => t.CreatedDate))
                 .ForMember(r => r.LastUpdateDate, x => x.MapFrom(t => t.LastUpdateDate))
-                .ForMember(r => r.Categories, x => x.MapFrom(t => t.Category))
+                .ForMember(r => r.Category, x => x.MapFrom(t => t.Category))
                 .ForMember(r => r.Status, x => x.MapFrom(t => t.Status));
 
             CreateMap<CreateCategoryCommand, Category>();
+            CreateMap<CreateTaskCommand, ScheduledTask>();
+            CreateMap<UpdateTaskCommand, ScheduledTask>();
         }
     }
 }
