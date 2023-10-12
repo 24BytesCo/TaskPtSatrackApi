@@ -23,7 +23,7 @@ namespace Tareas.Application.Features.Categories.Queries.GetCategoriesList
         public async Task<IReadOnlyList<Category>> Handle(GetCategoriesListQuery request, CancellationToken cancellationToken)
         {
             var includes = new List<Expression<Func<Category, object>>>();
-            return await _unitOfWork.Repository<Category>().GetAsync(null, x=> x.OrderBy(r=> r.Name), includes, true);
+            return await _unitOfWork.Repository<Category>().GetAsync(x=> x.Status == true, x=> x.OrderBy(r=> r.Name), includes, true);
         }
     }
 }

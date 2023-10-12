@@ -13,7 +13,7 @@ namespace Tareas.Domain.Common
      
         public DateTime CreatedDate { get; set; }
 
-        public DateTime LastUpdateDate { get; set; }
+        public DateTime? LastUpdateDate { get; set; }
 
         public bool Status { get; set; } = true;
     }

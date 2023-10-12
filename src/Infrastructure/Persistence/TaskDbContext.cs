@@ -26,6 +26,7 @@ namespace Tareas.Infrastructure.Persistence
                     // Si la entidad es nueva (Added), establece la fecha de creación en la fecha y hora actual.
                     case EntityState.Added:
                         entry.Entity.CreatedDate = DateTime.Now;
+                        entry.Entity.LastUpdateDate = null;
                         break;
 
                     // Si la entidad se está modificando (Modified), actualiza la fecha de última modificación a la fecha y hora actual.
