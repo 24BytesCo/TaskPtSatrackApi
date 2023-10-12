@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Xml;
 using System.Text.Json.Serialization;
+using Tareas.Api.Middlewares;
 using Tareas.Application;
 using Tareas.Application.Features.Categories.Queries.GetCategoriesList;
 using Tareas.Infrastructure;
@@ -60,6 +61,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionMiddleware>();
+
 
 //app.UseAuthorization();
 app.UseCors("CorsPolicy");

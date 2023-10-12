@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tareas.Application.Behaviors;
+using Tareas.Application.Features.Categories.Commands.CreateCategory;
 using Tareas.Application.Mappings;
 
 namespace Tareas.Application
@@ -37,11 +39,15 @@ namespace Tareas.Application
 
             // Se registran los siguientes comportamientos de MediatR como servicios transitorios en el contenedor de servicios:
 
-            // - 'UnhandledExceptionBehavior': Maneja excepciones no controladas en las solicitudes de MediatR.
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
+            //// - 'UnhandledExceptionBehavior': Maneja excepciones no controladas en las solicitudes de MediatR.
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
+
+            services.AddTransient<IValidator<CreateCategoryCommand>, CreateCategoryCommandValidator>();
+
 
             // - 'ValidationBehavior': Realiza la validación de las solicitudes de MediatR usando FluentValidation.
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
 
             return services;  // Se devuelve el contenedor de servicios actualizado con los servicios de la capa de aplicación registrados.
         }

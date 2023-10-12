@@ -1,16 +1,15 @@
 ﻿using MediatR;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tareas.Application.Features.Categories.Queries.Vms;
-using Tareas.Domain;
 
-namespace Tareas.Application.Features.Categories.Queries.GetCategoriesList
+namespace Tareas.Application.Features.Categories.Commands.CreateCategory
 {
-    public class GetCategoriesListQuery: IRequest<IReadOnlyList<CategoryVm>>
+    public class CreateCategoryCommand : IRequest<CategoryVm>
     {
+        public string? Name { get; set; }
     }
 }

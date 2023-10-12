@@ -27,6 +27,7 @@ namespace Tareas.Infrastructure.Persistence
                     case EntityState.Added:
                         entry.Entity.CreatedDate = DateTime.Now;
                         entry.Entity.LastUpdateDate = null;
+                        entry.Entity.Id = Guid.NewGuid();
                         break;
 
                     // Si la entidad se está modificando (Modified), actualiza la fecha de última modificación a la fecha y hora actual.

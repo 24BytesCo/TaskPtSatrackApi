@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Tareas.Application.Features.Categories.Commands.CreateCategory;
 using Tareas.Application.Features.Categories.Queries.GetCategoriesList;
+using Tareas.Application.Features.Categories.Queries.Vms;
 using Tareas.Domain;
 
 namespace Tareas.Api.Controllers
@@ -18,10 +20,17 @@ namespace Tareas.Api.Controllers
         }
 
         [HttpGet("List", Name = "GetCategoriesList")]
-        [ProducesResponseType(typeof(IReadOnlyList<Category>), (int) HttpStatusCode.OK)]
-        public async Task<ActionResult<IReadOnlyList<Category>>> GetCategoriesList() 
+        [ProducesResponseType(typeof(IReadOnlyList<CategoryVm>), (int) HttpStatusCode.OK)]
+        public async Task<ActionResult<IReadOnlyList<CategoryVm>>> GetCategoriesList() 
         {
             return Ok(await _mediator.Send(new GetCategoriesListQuery()));
+        }
+
+        [HttpPost("Create", Name = "CreateCategory")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<CategoryVm>> CreateCategory([FromForm] CreateCategoryCommand request)
+        {
+            return Ok(await _mediator.Send(request));
         }
 
 
