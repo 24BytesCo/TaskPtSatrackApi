@@ -6,7 +6,9 @@ using Tareas.Application.Features.Categories.Queries.GetCategoriesList;
 using Tareas.Application.Features.Categories.Queries.Vms;
 using Tareas.Application.Features.Tasks.Commands.CreateTask;
 using Tareas.Application.Features.Tasks.Commands.UpdateTask;
+using Tareas.Application.Features.Tasks.Queries.GetAllTask;
 using Tareas.Application.Features.Tasks.Queries.GetAllTaskActivesList;
+using Tareas.Application.Features.Tasks.Queries.GetAllTaskInactivesList;
 using Tareas.Application.Features.Tasks.Queries.Vms;
 using Tareas.Domain;
 
@@ -23,11 +25,25 @@ namespace Tareas.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("List", Name = "GetAllTaskActives")]
+        [HttpGet("ListAll", Name = "GetAllTask")]
         [ProducesResponseType(typeof(IReadOnlyList<TaskVm>), (int) HttpStatusCode.OK)]
-        public async Task<ActionResult<IReadOnlyList<TaskVm>>> GetAllTaskActivesList() 
+        public async Task<ActionResult<IReadOnlyList<TaskVm>>> GetAllTask() 
+        {
+            return Ok(await _mediator.Send(new GetAllTaskQuery()));
+        }
+
+        [HttpGet("ListPending", Name = "GetAllTaskPending")]
+        [ProducesResponseType(typeof(IReadOnlyList<TaskVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IReadOnlyList<TaskVm>>> GetAllTaskPending()
         {
             return Ok(await _mediator.Send(new GetAllTaskActivesListQuery()));
+        }
+
+        [HttpGet("ListCompleted", Name = "GetAllTaskCompleted")]
+        [ProducesResponseType(typeof(IReadOnlyList<TaskVm>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IReadOnlyList<TaskVm>>> GetAllTaskCompleted()
+        {
+            return Ok(await _mediator.Send(new GetAllTaskInactivesListQuery()));
         }
 
         [HttpPost("Create", Name = "CreateTask")]
